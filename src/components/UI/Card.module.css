@@ -1,0 +1,16 @@
+.card {
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  background-color: rgb(238, 236, 236, 0.947);
+  max-width: 50vw;
+}
+
+@media (max-width: 768px) {
+  .card {
+    max-width: 75vw;
+  }
+}

@@ -1,0 +1,41 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  color: red;
+}
+
+.errorText {
+  color: red;
+  font-size: small;
+  margin: 0;
+}
+
+.invisible {
+  display: none;
+}
+
+.button {
+  font-weight: bold;
+  background-color: rgb(74, 84, 95);
+  border: none;
+  padding: 0.4rem;
+  transition: background-color 0.3s ease-out;
+  border-radius: 4px;
+  color: white;
+  margin-top: 0.8rem;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: rgba(53, 53, 53, 0.644);
+}

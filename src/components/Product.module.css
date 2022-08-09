@@ -1,0 +1,41 @@
+.productForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-bottom: 1px inset rgb(158, 149, 149);
+  margin: 0.5rem 0 1rem 0;
+}
+
+.button {
+  font-weight: bold;
+  align-self: flex-end;
+  background-color: rgb(74, 84, 95);
+  border: none;
+  padding: 0.2rem;
+  padding-right: 0.4rem;
+  transition: background-color 0.3s ease-out;
+  color: white;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: rgba(53, 53, 53, 0.644);
+}
+
+.container {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+
+.input {
+  max-width: 28px;
+}
+
+@media (max-width: 768px) {
+  .productForm {
+    font-size: small;
+  }
+}

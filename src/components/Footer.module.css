@@ -1,0 +1,47 @@
+.footer {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  margin-bottom: 0;
+  background-color: rgb(81, 92, 104);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.712);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.listItem {
+  margin-bottom: 0.4rem;
+}
+
+.header {
+  margin-bottom: 0.4rem;
+}
+
+.link {
+  text-decoration: none;
+  color: rgb(165, 133, 78);
+  font-weight: bold;
+}
+
+.link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: rgb(180, 147, 90);
+}
+
+@media (max-width: 780px) {
+  .footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.icon {
+  max-width: 20px;
+  max-height: 20px;
+  margin-right: 4px;
+}

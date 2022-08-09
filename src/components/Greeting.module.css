@@ -1,0 +1,16 @@
+.greeting {
+  margin-left: 2rem;
+}
+
+.username {
+  color: rgb(165, 133, 78);
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .greeting {
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+  }
+}

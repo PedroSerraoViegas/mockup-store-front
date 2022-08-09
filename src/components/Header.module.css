@@ -1,0 +1,7 @@
+img {
+  object-fit: cover;
+  max-height: 50vh;
+  width: 100vw;
+  position: absolute;
+  z-index: -10;
+}
