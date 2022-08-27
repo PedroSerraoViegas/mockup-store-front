@@ -1,9 +1,10 @@
 import classes from "./AddProduct.module.css";
 import useValidation from "../../hooks/useValidation";
 import { Fragment, useState } from "react";
-
+//TODO: AJEITAR O INPUT NA HORA DE ADICIONAR CATEGORIA
 const AddProduct = (props) => {
-  const [selectedCategory, setSelectedCategory] = useState(false);
+  const [existingCategory, setExistingCategory] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("none");
 
   const name = useValidation((value) => value.trim() !== "");
 
@@ -13,15 +14,24 @@ const AddProduct = (props) => {
 
   const createProductHandler = async (event) => {
     event.preventDefault();
-    let newProduct = {
-      name: name.value,
-      price: price.value,
-      category: category.value,
-    };
+    let newProduct;
+    if (existingCategory === false) {
+      newProduct = {
+        name: name.value,
+        price: price.value,
+        category: category.value,
+      };
+    } else {
+      newProduct = {
+        name: name.value,
+        price: price.value,
+        category: selectedCategory,
+      };
+    }
 
     const data = newProduct;
 
-    fetch("http://localhost:8080/api/products", {
+    await fetch("http://localhost:8080/api/products", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,22 +49,28 @@ const AddProduct = (props) => {
     category.reset();
     name.reset();
     price.reset();
+    await props.onAddProduct();
   };
 
-  const formIsValid = price.isValid && name.isValid && category.isValid;
+  const formIsValid =
+    (price.isValid && name.isValid && category.isValid) ||
+    (selectedCategory !== "none" && price.isValid && name.isValid);
 
   const usernameClasses = name.hasError ? classes.error : "";
   const passwordClasses = price.hasError ? classes.error : "";
   const emailClasses =
-    category.hasError && !selectedCategory ? classes.error : "";
+    category.hasError && !existingCategory ? classes.error : "";
 
   const onSelectHandler = (event) => {
     if (event.target.value === "none") {
-      setSelectedCategory(false);
+      setExistingCategory(false);
     } else {
-      setSelectedCategory(true);
+      setExistingCategory(true);
+      setSelectedCategory(event.target.value);
     }
   };
+
+  const buttonClasses = formIsValid ? classes.button : classes.buttonDisabled;
 
   return (
     <Fragment>
@@ -88,14 +104,14 @@ const AddProduct = (props) => {
             onBlur={category.blurHandler}
             value={category.value}
             className={classes.input}
-            disabled={selectedCategory}
+            disabled={existingCategory}
           ></input>
-          {category.hasError && !selectedCategory && (
+          {category.hasError && !existingCategory && (
             <p className={classes.errorText}>Category can't be empty</p>
           )}
           <label htmlFor="category-select">Sort by existing category:</label>
           <select id="category-select" onChange={onSelectHandler}>
-            <option value={"none"}>None</option>
+            <option value="none">None</option>
             {props.categoryList?.map((category) => (
               <option value={category} key={category}>
                 {category}
@@ -118,11 +134,7 @@ const AddProduct = (props) => {
             <p className={classes.errorText}>Price has to be greater than 0</p>
           )}
         </div>
-        <button
-          type="submit"
-          disabled={!formIsValid}
-          className={classes.button}
-        >
+        <button type="submit" disabled={!formIsValid} className={buttonClasses}>
           Create new Product
         </button>
       </form>

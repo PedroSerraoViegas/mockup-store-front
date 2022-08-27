@@ -7,8 +7,8 @@ import Cart from "./components/Cart";
 import Footer from "./components/Footer";
 import Greeting from "./components/Greeting";
 import classes from "./App.module.css";
-import AddProduct from "./components/Admin/AddProduct";
 import ProductManagement from "./components/Admin/ProductManagement";
+import ProductDetail from "./components/Admin/ProductDetail";
 
 function App() {
   const [cartVisible, setCartIsVisible] = useState(false);
@@ -36,6 +36,9 @@ function App() {
         </Route>
         <Route path="/" exact>
           <Display />
+        </Route>
+        <Route path="/product/:id">
+          <ProductDetail />
         </Route>
         {cartVisible && <Cart onCartClick={cartVisibilityHandler} />}
       </main>

@@ -7,7 +7,7 @@ import classes from "./ProductManagement.module.css";
 const ProductManagement = () => {
   const [category, setCategory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selected, setSelected] = useState();
+  const [selected, setSelected] = useState("electronics");
   const [categoryList, setCategoryList] = useState();
   const [httpError, setHttpError] = useState(null);
 
@@ -59,34 +59,38 @@ const ProductManagement = () => {
   };
 
   const onSelectHandler = (event) => {
+    setSelected(event.target.value);
     fetchCategories(event.target.value).catch((error) => {
       setIsLoading(false);
       setHttpError(error.message);
     });
-    setSelected(event.target.value);
   };
 
   useEffect(() => {
-    fetchCategories("dairy").catch((error) => {
+    fetchCategories("electronics").catch((error) => {
       setIsLoading(false);
       setHttpError(error.message);
     });
   }, []);
-
+  //Fetches initial product list when the component is first loaded
   useEffect(() => {
     fetchList().catch((error) => {
       setIsLoading(false);
       setHttpError(error.message);
     });
   }, []);
-
+  //Fetches category list for <option> HTML elements
   const productAlterHandler = () => {
     fetchCategories(selected).catch((error) => {
       setIsLoading(false);
       setHttpError(error.message);
     });
+    fetchList().catch((error) => {
+      setIsLoading(false);
+      setHttpError(error.message);
+    });
   };
-
+  //Reloads products after one has been deleted or created
   let loadedProducts = category.map((product) => (
     <AdminProduct
       name={product.name}
@@ -99,7 +103,10 @@ const ProductManagement = () => {
 
   return (
     <Card>
-      <AddProduct categoryList={categoryList} />
+      <AddProduct
+        categoryList={categoryList}
+        onAddProduct={productAlterHandler}
+      />
       <div className={classes.select}>
         <label htmlFor="category-select">Sort by category:</label>
         <select id="category-select" onChange={onSelectHandler}>

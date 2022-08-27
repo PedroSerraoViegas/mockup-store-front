@@ -6,6 +6,16 @@
   margin: 0.5rem 0 1rem 0;
 }
 
+.link {
+  font-weight: bold;
+  text-decoration: none;
+  color: rgb(165, 133, 78);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
 .button {
   font-weight: bold;
   align-self: flex-end;

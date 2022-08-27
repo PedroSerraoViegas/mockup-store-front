@@ -33,12 +33,14 @@ const NavBar = (props) => {
           ></img>
           <h3>REACT MOCKUP STORE</h3>
         </div>
-        <Link className={classes.link} to="/">
-          Home
-        </Link>
-        <Link className={classes.link} to="/admin">
-          Admin
-        </Link>
+        <div className={classes.links}>
+          <Link className={classes.link} to="/">
+            Home
+          </Link>
+          <Link className={classes.link} to="/admin">
+            Admin
+          </Link>
+        </div>
         <div className={classes.actions}>
           {isLoggedIn && (
             <button onClick={logoutHandler} className={classes.logout}>

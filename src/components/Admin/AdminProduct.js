@@ -1,7 +1,7 @@
 import classes from "./AdminProduct.module.css";
+import { Link } from "react-router-dom";
 
 const AdminProduct = (props) => {
-
   const deleteProductHandler = async () => {
     await fetch(`http://localhost:8080/api/products/${props.id}`, {
       method: "DELETE",
@@ -15,7 +15,10 @@ const AdminProduct = (props) => {
   return (
     <div className={classes.productForm}>
       <label htmlFor={props.id}>
-        {props.name} - Id - <strong>{props.id}</strong>
+        <Link to={`/product/${props.id}`} className={classes.link}>
+          {props.name}
+        </Link>{" "}
+        - Id - <strong>{props.id}</strong>
       </label>
       <div className={classes.container}>
         <button
